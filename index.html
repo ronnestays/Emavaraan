@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudioG.Nails - Nail Art Workshop Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .logo-left {
+            height: 24px;
+        }
+        .logo-right {
+            height: 48px;
+            object-fit: contain;
+        }
+        .workshop-details-card {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .workshop-details-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+            color: var(--text-secondary);
+        }
+        .workshop-details-card li {
+            margin-bottom: 8px;
+        }
+        .qr-code-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            background: #fff;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .qr-code-container img {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 16px;
+        }
+        .qr-code-container p {
+            font-weight: 500;
+            color: #2d3223;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .upi-copy-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0,0,0,0.03);
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px dashed rgba(0,0,0,0.2);
+        }
+        .upi-copy-container span {
+            font-size: 0.95rem;
+            color: #2d3223;
+            font-weight: 600;
+        }
+        .btn-copy {
+            padding: 8px;
+            border-radius: 50%;
+            background: transparent;
+            color: #2d3223;
+            border: 1px solid rgba(0,0,0,0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .btn-copy:hover {
+            background: rgba(0,0,0,0.08);
+        }
+        .file-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Vibrant background blobs to create the liquid glass refraction -->
+    <div class="background-effects">
+        <div class="glow glow-pink"></div>
+        <div class="glow glow-blue"></div>
+        <div class="glow glow-orange"></div>
+    </div>
+
+    <main class="app-container">
+        <form id="questionnaire-form" class="form-container glass-panel">
+            <header class="header">
+                <div class="header-top">
+                    <img src="./StudioGNails-logo.png" alt="Studio G Nails Logo" class="logo-right">
+                    <img src="./logo.svg" alt="Intrface Logo" class="logo-left">
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="step-indicator" id="step-indicator">Section 1 of 3</div>
+            </header>
+
+            <!-- Section 1: Personal Details -->
+            <div class="form-step active" data-step="1">
+                <h2 class="section-title">Join our Nail Art Workshop</h2>
+                <p class="section-subtitle">Let's start with your details</p>
+
+                <div class="input-group">
+                    <label for="fullName">1. Full Name</label>
+                    <input type="text" class="text-input" id="fullName" name="fullName" placeholder="e.g. Aditi Sharma"
+                        required>
+                </div>
+
+                <div class="input-group">
+                    <label for="emailAddress">2. Email Address</label>
+                    <input type="email" class="text-input" id="emailAddress" name="emailAddress" placeholder="you@example.com"
+                        required>
+                </div>
+
+                <div class="input-group">
+                    <label for="phoneNumber">3. WhatsApp Number</label>
+                    <input type="tel" class="text-input" id="phoneNumber" name="phoneNumber" placeholder="+91 9876543210"
+                        required>
+                </div>
+            </div>
+
+            <!-- Section 2: Preferences -->
+            <div class="form-step" data-step="2">
+                <h2 class="section-title">Workshop Preferences</h2>
+                <p class="section-subtitle">Make your own Navratri Nails (Press ons)</p>
+
+                <div class="workshop-details-card">
+                    <strong>Workshop Details:</strong>
+                    <ul>
+                        <li>📅 Date: 06/10/2026 (Sunday)</li>
+                        <li>⏰ Time: 11 AM to 2 PM</li>
+                        <li>✨ Create your own Navratri press-on nails</li>
+                        <li>💅 All materials provided + Step-by-step guidance</li>
+                        <li>🛍️ Take home your custom nail set</li>
+                    </ul>
+                </div>
+
+                <div class="input-group">
+                    <label>4. We're offering complimentary coffee. What's your preference?</label>
+                    <div class="radio-group row-flex">
+                        <label class="radio-pill">
+                            <input type="radio" name="coffeePreference" value="Hot Coffee" required>
+                            <span>Hot Coffee ☕️</span>
+                        </label>
+                        <label class="radio-pill">
+                            <input type="radio" name="coffeePreference" value="Cold Coffee">
+                            <span>Cold Coffee 🧊</span>
+                        </label>
+                        <label class="radio-pill">
+                            <input type="radio" name="coffeePreference" value="No Thanks">
+                            <span>No Thanks</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Payment -->
+            <div class="form-step" data-step="3">
+                <h2 class="section-title">Secure Your Seat</h2>
+                <p class="section-subtitle">Limited seats available. Register now!</p>
+
+                <div class="qr-code-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=kalsibilliz99@okicici&pn=Billiz%20kalsi&am=999" alt="UPI QR Code">
+                    <p>Scan to pay ₹999 via any UPI app</p>
+                    <div class="upi-copy-container">
+                        <span id="upi-id-text">kalsibilliz99@okicici</span>
+                        <button type="button" class="btn-copy" onclick="copyUPI()" title="Copy UPI ID">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="paymentScreenshot">5. Upload Payment Screenshot</label>
+                    <input type="file" class="file-input" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
+                </div>
+            </div>
+
+            <div class="form-navigation">
+                <button type="button" id="reset-btn" class="btn btn-icon btn-ghost" title="Reset Form">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                        <path d="M3 3v5h5"></path>
+                    </svg>
+                </button>
+                <div class="nav-right">
+                    <button type="button" id="prev-btn" class="btn btn-outline hidden">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                        Go back
+                    </button>
+                    <button type="button" id="next-btn" class="btn btn-primary">Continue</button>
+                    <button type="submit" id="submit-btn" class="btn btn-primary hidden">Submit Registration</button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

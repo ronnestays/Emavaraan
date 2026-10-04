@@ -23,7 +23,7 @@
 body {
     font-family: 'Bai Jamjuree', sans-serif;
     background-color: var(--bg-color);
-    background-image: url('https://matraoflove.com/assets/3hero-CmUawqPP.jpeg');
+    background-image: linear-gradient(rgba(121, 127, 98, 0.85), rgba(121, 127, 98, 0.85)), url('https://matraoflove.com/assets/3hero-CmUawqPP.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

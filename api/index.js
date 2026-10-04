@@ -69,19 +69,46 @@ app.post('/api/submit', async (req, res) => {
             });
         }
 
-        // Send email via Resend
+        // Send notification email to the Team via Resend
         const { data: emailData, error } = await resend.emails.send({
-            from: process.env.FROM_EMAIL || 'onboarding@resend.dev',
-            to: ['teams@intrface.in'], // Consider changing if not testing
-            subject: 'New Workshop Registration',
+            from: 'noreply@intrface.in',
+            to: ['teams@intrface.in'],
+            subject: `New Workshop Registration: ${data.firstName || ''} ${data.lastName || ''}`,
             html: htmlBody,
             reply_to: data.emailAddress || 'no-reply@intrface.in',
             attachments: attachments.length > 0 ? attachments : undefined
         });
 
         if (error) {
-            console.error('Resend Error:', error);
+            console.error('Resend Error (Team Notification):', error);
             return res.status(500).json({ success: false, message: 'Failed to send email. Please try again.' });
+        }
+
+        // Send confirmation email to the Client
+        if (data.emailAddress) {
+            const clientHtmlBody = `
+                <h2>Registration Confirmed! 🎉</h2>
+                <p>Hi ${data.firstName || ''},</p>
+                <p>Thank you for registering for the StudioG.Nails Navratri Nail Art Workshop.</p>
+                <p>We have successfully received your details and payment screenshot. Our team will review it and get back to you if needed.</p>
+                <br>
+                <h3>Your Workshop Details:</h3>
+                <ul>
+                    <li><b>Date:</b> 06/10/2026 (Tuesday)</li>
+                    <li><b>Time:</b> 11 AM to 2 PM</li>
+                    <li><b>Coffee:</b> ${data.coffeePreference || 'N/A'}</li>
+                </ul>
+                <br>
+                <p>Looking forward to seeing you!</p>
+                <p>- The StudioG.Nails Team</p>
+            `;
+
+            await resend.emails.send({
+                from: 'noreply@intrface.in',
+                to: [data.emailAddress],
+                subject: 'Workshop Registration Confirmed - StudioG.Nails',
+                html: clientHtmlBody
+            });
         }
 
         res.status(200).json({ success: true, message: 'Submission successful', id: emailData.id });

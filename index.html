@@ -25,20 +25,45 @@
             object-fit: contain;
         }
         .workshop-details-card {
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
+            background: rgba(45, 50, 35, 0.4);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .workshop-details-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 16px 0 0 16px;
+        }
+        .workshop-details-card strong {
+            display: block;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
         }
         .workshop-details-card ul {
             list-style-type: none;
             padding-left: 0;
             margin-top: 10px;
-            color: var(--text-secondary);
+            color: var(--text-primary);
         }
         .workshop-details-card li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
         }
         .qr-code-container {
             display: flex;

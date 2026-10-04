@@ -133,21 +133,25 @@
                 <p class="section-subtitle">Let's start with your details</p>
 
                 <div class="input-group">
-                    <label for="fullName">1. Full Name</label>
-                    <input type="text" class="text-input" id="fullName" name="fullName" placeholder="e.g. Aditi Sharma"
-                        required>
+                    <label for="firstName">1. First Name</label>
+                    <input type="text" class="text-input" id="firstName" name="firstName" placeholder="e.g. Aditi" required>
                 </div>
 
                 <div class="input-group">
-                    <label for="emailAddress">2. Email Address</label>
+                    <label for="lastName">2. Last Name</label>
+                    <input type="text" class="text-input" id="lastName" name="lastName" placeholder="e.g. Sharma" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="emailAddress">3. Email Address</label>
                     <input type="email" class="text-input" id="emailAddress" name="emailAddress" placeholder="you@example.com"
-                        required>
+                        pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address" required>
                 </div>
 
                 <div class="input-group">
-                    <label for="phoneNumber">3. WhatsApp Number</label>
+                    <label for="phoneNumber">4. WhatsApp Number</label>
                     <input type="tel" class="text-input" id="phoneNumber" name="phoneNumber" placeholder="+91 9876543210"
-                        required>
+                        pattern="^\+?[0-9\s\-]{10,15}$" title="Please enter a valid phone number (10-15 digits)" required>
                 </div>
             </div>
 
@@ -159,7 +163,7 @@
                 <div class="workshop-details-card">
                     <strong>Workshop Details:</strong>
                     <ul>
-                        <li>📅 Date: 06/10/2026 (Sunday)</li>
+                        <li>📅 Date: 06/10/2026 (Tuesday)</li>
                         <li>⏰ Time: 11 AM to 2 PM</li>
                         <li>✨ Create your own Navratri press-on nails</li>
                         <li>💅 All materials provided + Step-by-step guidance</li>
@@ -168,7 +172,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label>4. We're offering complimentary coffee. What's your preference?</label>
+                    <label>5. We're offering complimentary coffee. What's your preference?</label>
                     <div class="radio-group row-flex">
                         <label class="radio-pill">
                             <input type="radio" name="coffeePreference" value="Hot Coffee" required>
@@ -206,7 +210,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="paymentScreenshot">5. Upload Payment Screenshot</label>
+                    <label for="paymentScreenshot">6. Upload Payment Screenshot</label>
                     <input type="file" class="file-input" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
                 </div>
             </div>

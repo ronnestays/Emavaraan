@@ -140,12 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     }, 500);
                 }
             } else {
-                if (!input.value.trim()) {
+                if (!input.checkValidity() || !input.value.trim()) {
                     isValid = false;
                     input.classList.add('input-error');
                     setTimeout(() => {
                         input.classList.remove('input-error');
                     }, 500);
+                    input.reportValidity();
                 }
             }
         });

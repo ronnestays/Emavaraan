@@ -46,7 +46,7 @@ app.post('/api/submit', async (req, res) => {
             <h2>New StudioG.Nails Workshop Registration</h2>
             
             <h3>--- Personal Details ---</h3>
-            <p><b>Full Name:</b> ${data.fullName || 'N/A'}</p>
+            <p><b>Name:</b> ${data.firstName || ''} ${data.lastName || ''}</p>
             <p><b>Email:</b> ${data.emailAddress || 'N/A'}</p>
             <p><b>WhatsApp Number:</b> ${data.phoneNumber || 'N/A'}</p>
             

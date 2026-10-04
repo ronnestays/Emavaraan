@@ -97,7 +97,7 @@ app.post('/api/submit', async (req, res) => {
         // Send notification email to the Team via Resend
         const { data: emailData, error } = await resend.emails.send({
             from: 'noreply@intrface.in',
-            to: ['aryajhunjhunwala20025@gmail.com'],
+            to: ['kalsibilliz99@gmail.com'],
             subject: `Matra x StudioG.Nails Navratri Workshop Registration: ${safeFirstName} ${safeLastName}`,
             html: htmlBody,
             reply_to: safeEmail || 'no-reply@intrface.in',

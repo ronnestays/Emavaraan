@@ -72,7 +72,7 @@ app.post('/api/submit', async (req, res) => {
         // Send notification email to the Team via Resend
         const { data: emailData, error } = await resend.emails.send({
             from: 'noreply@intrface.in',
-            to: ['teams@intrface.in'],
+            to: ['connect@intrface.in'],
             subject: `New Workshop Registration: ${data.firstName || ''} ${data.lastName || ''}`,
             html: htmlBody,
             reply_to: data.emailAddress || 'no-reply@intrface.in',

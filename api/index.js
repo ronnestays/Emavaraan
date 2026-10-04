@@ -43,7 +43,7 @@ app.post('/api/submit', async (req, res) => {
         const data = req.body;
 
         const htmlBody = `
-            <h2>New StudioG.Nails Workshop Registration</h2>
+            <h2>Matra x StudioG.Nails Navratri Workshop Registration</h2>
             
             <h3>--- Personal Details ---</h3>
             <p><b>Name:</b> ${data.firstName || ''} ${data.lastName || ''}</p>
@@ -72,8 +72,8 @@ app.post('/api/submit', async (req, res) => {
         // Send notification email to the Team via Resend
         const { data: emailData, error } = await resend.emails.send({
             from: 'noreply@intrface.in',
-            to: ['connect@intrface.in'],
-            subject: `New Workshop Registration: ${data.firstName || ''} ${data.lastName || ''}`,
+            to: ['aryajhunjhunwala20025@gmail.com'],
+            subject: `Matra x StudioG.Nails Navratri Workshop Registration: ${data.firstName || ''} ${data.lastName || ''}`,
             html: htmlBody,
             reply_to: data.emailAddress || 'no-reply@intrface.in',
             attachments: attachments.length > 0 ? attachments : undefined

@@ -15,9 +15,16 @@ app.use(helmet({
     contentSecurityPolicy: false,
 }));
 
-// Enable CORS for frontend requests
+// Enable CORS for specific origins
+const allowedOrigins = ['https://studiognails.intrface.in', 'http://localhost:3000', 'http://localhost:5000'];
 app.use(cors({
-    origin: '*',
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['POST']
 }));
 
@@ -42,16 +49,34 @@ app.post('/api/submit', async (req, res) => {
     try {
         const data = req.body;
 
+        // Sanitize inputs to prevent HTML injection in emails
+        const escapeHTML = (str) => {
+            if (typeof str !== 'string') return '';
+            return str.replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag]));
+        };
+
+        const safeFirstName = escapeHTML(data.firstName);
+        const safeLastName = escapeHTML(data.lastName);
+        const safeEmail = escapeHTML(data.emailAddress);
+        const safePhone = escapeHTML(data.phoneNumber);
+        const safeCoffee = escapeHTML(data.coffeePreference);
+
         const htmlBody = `
             <h2>Matra x StudioG.Nails Navratri Workshop Registration</h2>
             
             <h3>--- Personal Details ---</h3>
-            <p><b>Name:</b> ${data.firstName || ''} ${data.lastName || ''}</p>
-            <p><b>Email:</b> ${data.emailAddress || 'N/A'}</p>
-            <p><b>WhatsApp Number:</b> ${data.phoneNumber || 'N/A'}</p>
+            <p><b>Name:</b> ${safeFirstName} ${safeLastName}</p>
+            <p><b>Email:</b> ${safeEmail || 'N/A'}</p>
+            <p><b>WhatsApp Number:</b> ${safePhone || 'N/A'}</p>
             
             <h3>--- Preferences ---</h3>
-            <p><b>Coffee Preference:</b> ${data.coffeePreference || 'N/A'}</p>
+            <p><b>Coffee Preference:</b> ${safeCoffee || 'N/A'}</p>
         `;
 
         // If no API key, mock success for local testing
@@ -73,9 +98,9 @@ app.post('/api/submit', async (req, res) => {
         const { data: emailData, error } = await resend.emails.send({
             from: 'noreply@intrface.in',
             to: ['aryajhunjhunwala20025@gmail.com'],
-            subject: `Matra x StudioG.Nails Navratri Workshop Registration: ${data.firstName || ''} ${data.lastName || ''}`,
+            subject: `Matra x StudioG.Nails Navratri Workshop Registration: ${safeFirstName} ${safeLastName}`,
             html: htmlBody,
-            reply_to: data.emailAddress || 'no-reply@intrface.in',
+            reply_to: safeEmail || 'no-reply@intrface.in',
             attachments: attachments.length > 0 ? attachments : undefined
         });
 
@@ -85,10 +110,10 @@ app.post('/api/submit', async (req, res) => {
         }
 
         // Send confirmation email to the Client
-        if (data.emailAddress) {
+        if (safeEmail) {
             const clientHtmlBody = `
                 <h2>Registration Confirmed! 🎉</h2>
-                <p>Hi ${data.firstName || ''},</p>
+                <p>Hi ${safeFirstName},</p>
                 <p>Thank you for registering for the StudioG.Nails Navratri Nail Art Workshop.</p>
                 <p>We have successfully received your details and payment screenshot. Our team will review it and get back to you if needed.</p>
                 <br>
@@ -96,7 +121,7 @@ app.post('/api/submit', async (req, res) => {
                 <ul>
                     <li><b>Date:</b> 06/10/2026 (Tuesday)</li>
                     <li><b>Time:</b> 11 AM to 2 PM</li>
-                    <li><b>Coffee:</b> ${data.coffeePreference || 'N/A'}</li>
+                    <li><b>Coffee:</b> ${safeCoffee || 'N/A'}</li>
                 </ul>
                 <br>
                 <p>Looking forward to seeing you!</p>
@@ -105,7 +130,7 @@ app.post('/api/submit', async (req, res) => {
 
             await resend.emails.send({
                 from: 'noreply@intrface.in',
-                to: [data.emailAddress],
+                to: [safeEmail],
                 subject: 'Workshop Registration Confirmed - StudioG.Nails',
                 html: clientHtmlBody
             });
